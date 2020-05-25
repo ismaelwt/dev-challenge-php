@@ -1,0 +1,28 @@
+.page-header
+    h1 Stuff to do...
+
+    div.form-horizontal.form-group
+        button.btn.btn-primary(ng-click='create()')
+                        span.label New
+    
+        button.btn.btn-default(ng-click='edit()')
+                        span.label edit
+
+
+.table-responsive
+    table.table.table-bordered.table-striped.table-hover
+        thead
+            tr
+                th Name
+                th Description
+                th Done
+                th Created At
+        tbody
+            tr(ng-repeat='todoItem in todoItems track by $index', ng-click='setSelected(todoItem)', ng-class="{ 'selectedItem' : selected != null && selected.id == todoItem.id }")
+                td {{todoItem.name}}
+                td {{todoItem.description}}
+                td {{todoItem.done ? 'true' : 'false'}}
+                td {{todoItem.created_at | dateTime | date : 'dd/MM/yyyy' }}
+                td
+                    button.btn.btn-danger.btn-xs(ng-click='delete(todoItem)')
+                        span.label Delete
